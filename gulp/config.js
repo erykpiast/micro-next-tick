@@ -3,32 +3,19 @@
 module.exports = {
     src: {
         js: {
-            files: [ './src/js/**/*.js', '!./src/js/**/spec/**/*.js' ],
-            main: './src/js/app.js'
-        },
-        html: {
-            dir: './src/html',
-            files: './src/html/**/*.html'
-        },
-        css: {
-            files: './src/css/**/*.scss'
+            files: [ './src/**/*.js', '!./src/**/spec/**/*.js' ],
+            main: './src/index.js'
         }
     },
     dist: {
         dir: './dist',
         js: {
             dir: './dist',
-            bundleName: 'bundle.js'
-        },
-        html: {
-            dir: './dist'
-        },
-        css: {
-            dir: './dist'
+            bundleName: 'micro-next-tick.js'
         }
     },
     test: {
-        files: './src/js/**/spec/**/*.spec.js',
+        files: './src/**/spec/**/*.spec.js',
         bundle: {
             name: 'tests.js',
             dir: './dist'

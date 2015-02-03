@@ -22,7 +22,7 @@
                 ".crt",
                 ".tmp"
             ],
-            "name": "Online CSS Autoprefixer",
+            "name": "Micro nextTick",
             "path": "."
         }
     ]
