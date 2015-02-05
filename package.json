@@ -26,6 +26,7 @@
   "devDependencies": {
     "browserify": "~8.1",
     "chai": "~1.10",
+    "chai-spies": "~0.5",
     "extend": "~2.0",
     "glob": "~4.3",
     "gulp": "~3.8",
@@ -40,14 +41,16 @@
     "karma": "~0.12",
     "karma-chrome-launcher": "~0.1",
     "karma-firefox-launcher": "~0.1",
-    "karma-phantomjs-launcher": "~0.1",
     "karma-mocha": "~0.1",
     "karma-mocha-reporter": "~0.3",
+    "karma-phantomjs-launcher": "~0.1",
     "lodash.foreach": "~2.4",
     "mocha": "~2.1",
     "proxyquireify": "~1.1",
     "run-sequence": "~1.0",
     "vinyl-source-stream": "~1.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash.isnative": "^3.0.0"
+  }
 }
