@@ -4,16 +4,11 @@ var chai = require('chai');
 var spies = require('chai-spies');
 var proxyquire = require('proxyquireify')(require);
 
-var expect = chai.expect;
 var assert = chai.assert;
 chai.use(spies);
 
 
-var nextTick = proxyquire('../index', {
-    'lodash.isnative': chai.spy(function() {
-        return true;
-    })
-});
+var nextTick = proxyquire('../index', { });
 
 
 describe('nextTick module API test', function() {
@@ -25,35 +20,6 @@ describe('nextTick module API test', function() {
             nextTick(chai.spy());
         });
     });
-
-
-    describe('instantiating', function() {
-
-        it('Should use Object.observe if available', function() {
-
-            beforeEach(function() {
-                Object.observe = function() { };
-            });
-
-            assert.throws(function() {
-                nextTick();
-            }, /is not a function$/);
-
-            assert.throws(function() {
-                nextTick(null);
-            }, /is not a function$/);
-
-            assert.throws(function() {
-                nextTick('');
-            }, /is not a function$/);
-
-            assert.throws(function() {
-                nextTick({ call: function() { } });
-            }, /is not a function$/);
-        });
-
-    });
-
 
     describe('error handling', function() {
 

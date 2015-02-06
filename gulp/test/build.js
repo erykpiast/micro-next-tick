@@ -5,6 +5,7 @@ var gutil = require('gulp-util');
 var source = require('vinyl-source-stream');
 var glob = require('glob');
 var browserify = require('browserify');
+var proxyquire = require('proxyquireify');
 
 var config = require('../config');
 
@@ -17,6 +18,8 @@ var bundler = (function createBundler() {
     glob.sync(config.test.files).forEach(function(filePath) {
         bundler = bundler.add(filePath);
     });
+
+    bundler.plugin(proxyquire.plugin);
 
     return bundler;
 })();

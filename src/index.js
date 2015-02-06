@@ -1,59 +1,48 @@
 'use strict';
 
-var isNative = require('lodash.isnative');
 var Queue = require('./queue');
-
-var originalNextTick = ('undefined' !== typeof process && 'function' === typeof process.nextTick ? process.nextTick : undefined);
-var objectObserveAvailable = ('function' === typeof Object.observe) && isNative(Object.observe);
-var promiseResolveAvailable = ('undefined' !== typeof Promise) && ('function' === typeof Promise.resolve) && isNative(Promise.resolve);
+var MicrotaskScheduler = require('./microtask-scheduler');
+var originalNextTick = require('./original-next-tick');
+var assertIsFunction = require('./assert-is-function');
 
 var queue = new Queue();
 
-var scheduleDraining = (function() {
-    if(objectObserveAvailable) {
-        var obj = { prop: 1 };
+var scheduler;
+try {
+    scheduler = new MicrotaskScheduler(function() {
+        queue.drain();
+    });
+} catch(err) { }
 
-        Object.observe(obj, drainQueue);
+if(scheduler) {
+    module.exports = function nextTick(fn) {
+        assertIsFunction(fn);
 
-        return function() {
-            obj.prop = -obj.prop;
-        };
-    }
-
-    if(promiseResolveAvailable) {
-        var resolvedPromise = Promise.resolve();
-
-        return function() {
-            resolvedPromise
-                .then(drainQueue);
-        };
-    }
-
-    if(originalNextTick) {
-        return undefined;
-    }
-
-    return function() {
-        setTimeout(drainQueue, 0);
-    };
-})();
-
-module.exports = function nextTick(fn) {
-    var type = typeof fn;
-    if(type !== 'function') {
-        throw new TypeError(type + ' is not a function');
-    }
-
-    if(scheduleDraining) {
         queue.add(fn);
 
+        // schedule draining on first element
         if (queue.length === 1) {
-            scheduleDraining();
+            scheduler.schedule();
         }
-    } else {
-        // if microtask scheduling is not available
-        // and original nextTick implementation is, fall back to it
-        // it has queue draining mechanism that fits better for setTimeout
+    };
+} else if(originalNextTick) {
+    // if microtask scheduling is not available
+    // and original nextTick implementation is, fall back to it
+    // in Browserify it has queue draining mechanism that fits better for setTimeout
+    module.exports = function nextTick(fn) {
+        assertIsFunction(fn);
+
         originalNextTick(fn);
-    }
-};
+    };
+
+    queue = null; // queue is not needed
+} else {
+    // without original nextTick from Browserify we can't do much more
+    // than reimplementing it here, but is overcomplication
+    // use setTimeout instead of throwing error for non-browserify enviroments
+    module.exports = function nextTick(fn) {
+        assertIsFunction(fn);
+
+        setTimeout(fn, 0);
+    };
+}
