@@ -13,7 +13,7 @@ module.exports = function (config) {
         port: 9876,
         autoWatch: false,
 
-        browsers: [ 'Chrome' ],
+        browsers: [ 'Firefox'/*, 'Chrome'*/ ],
         singleRun: true
     });
 };

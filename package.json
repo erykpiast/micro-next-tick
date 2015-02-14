@@ -25,13 +25,10 @@
   "homepage": "https://github.com/erykpiast/micro-next-tick",
   "devDependencies": {
     "browserify": "~8.1",
-    "chai": "~1.10",
+    "chai": "~2.0",
     "chai-spies": "~0.5",
-    "extend": "~2.0",
     "glob": "~4.3",
     "gulp": "~3.8",
-    "gulp-autoprefixer": "~2.0",
-    "gulp-connect": "~2.2",
     "gulp-copy": "~0.0",
     "gulp-jshint": "~1.9",
     "gulp-karma": "~0.0",
@@ -44,13 +41,12 @@
     "karma-mocha": "~0.1",
     "karma-mocha-reporter": "~0.3",
     "karma-phantomjs-launcher": "~0.1",
-    "lodash.foreach": "~2.4",
     "mocha": "~2.1",
-    "proxyquireify": "~1.1",
+    "proxyquireify": "~1.2",
     "run-sequence": "~1.0",
     "vinyl-source-stream": "~1.0"
   },
   "dependencies": {
-    "lodash.isnative": "^3.0.0"
+    "lodash.isnative": "~3.0"
   }
 }

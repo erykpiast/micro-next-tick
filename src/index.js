@@ -6,11 +6,12 @@ var originalNextTick = require('./original-next-tick');
 var assertIsFunction = require('./assert-is-function');
 
 var queue = new Queue();
+var call = function(fn) { fn(); };
 
 var scheduler;
 try {
     scheduler = new MicrotaskScheduler(function() {
-        queue.drain();
+        queue.drain(call);
     });
 } catch(err) { }
 
@@ -25,6 +26,7 @@ if(scheduler) {
             scheduler.schedule();
         }
     };
+    module.exports.queue = queue;
 } else if(originalNextTick) {
     // if microtask scheduling is not available
     // and original nextTick implementation is, fall back to it
