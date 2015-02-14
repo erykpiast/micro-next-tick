@@ -4,7 +4,7 @@ module.exports = function (config) {
 
         frameworks: [ 'mocha' ],
 
-        files: [ /* definition in gulpfile */ ],
+        files: [ 'dist/tests.js'/* definition in gulpfile */ ],
 
         reporters: [ 'mocha' ],
         colors: true,
@@ -13,7 +13,7 @@ module.exports = function (config) {
         port: 9876,
         autoWatch: false,
 
-        browsers: [ 'Firefox'/*, 'Chrome'*/ ],
-        singleRun: true
+        browsers: [ 'Firefox', 'Chrome' ],
+        singleRun: false
     });
 };

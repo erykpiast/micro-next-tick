@@ -26,7 +26,6 @@ if(scheduler) {
             scheduler.schedule();
         }
     };
-    module.exports.queue = queue;
 } else if(originalNextTick) {
     // if microtask scheduling is not available
     // and original nextTick implementation is, fall back to it

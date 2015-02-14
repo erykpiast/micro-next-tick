@@ -7,8 +7,10 @@ var isNative = require('lodash.isnative');
  * @access public
  */
 // TODO: consider additional tests, like simple checking if callbacks are called in right order
-// but be careful, they have to be async!
-var promiseResolve = (('object' === typeof Promise) && ('function' === typeof Promise.resolve) && isNative(Promise.resolve) ?
+// Firefox < 36 and IE TP has broken implementation of Promise.prototype.then (not based on microtask or not exactly)
+// in that case will be better to fall back to original next tick
+// but be careful, such test has to be async! how to deal with it?
+var promiseResolve = (('function' === typeof Promise) && ('function' === typeof Promise.resolve) && isNative(Promise.resolve) ?
     Promise.resolve :
     undefined);
 

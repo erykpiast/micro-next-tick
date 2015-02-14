@@ -102,8 +102,6 @@ describe('nextTick scheduling test', function() {
             }, 0);
 
             nextTick(microscheduled1);
-
-            console.log(nextTick.queue);
         });
     });
 
