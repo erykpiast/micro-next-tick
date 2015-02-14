@@ -59,13 +59,13 @@ describe('nextTick scheduling test', function() {
 
 
     it('Should call scheduled function before setTimeout callback', function(done) {
+        nextTick(microscheduled);
+
         setTimeout(function() {
             expect(microscheduled).to.have.been.called();
 
             done();
         }, 0);
-
-        nextTick(microscheduled);
     });
 
 
@@ -92,6 +92,8 @@ describe('nextTick scheduling test', function() {
         });
 
         it('Should call all scheduled function before setTimeout callback', function(done) {
+            nextTick(microscheduled1);
+            
             setTimeout(function() {
                 expect(microscheduled1).to.have.been.called();
                 expect(microscheduled11).to.have.been.called();
@@ -100,8 +102,6 @@ describe('nextTick scheduling test', function() {
 
                 done();
             }, 0);
-
-            nextTick(microscheduled1);
         });
     });
 
