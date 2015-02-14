@@ -23,7 +23,7 @@ module.exports = function (config) {
         autoWatch: false,
 
         browsers: [ 'Firefox', 'Chrome' ],
-        singleRun: false
+        singleRun: true
     };
 
     if(process.env.TRAVIS){
