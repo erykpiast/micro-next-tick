@@ -25,6 +25,7 @@
   "homepage": "https://github.com/erykpiast/micro-next-tick",
   "devDependencies": {
     "browserify": "~8.1",
+    "browserslist": "^0.2.0",
     "chai": "~2.0",
     "chai-spies": "~0.5",
     "glob": "~4.3",
@@ -41,6 +42,8 @@
     "karma-mocha": "~0.1",
     "karma-mocha-reporter": "~0.3",
     "karma-phantomjs-launcher": "~0.1",
+    "karma-sauce-launcher": "~0.2",
+    "lodash.assign": "^3.0.0",
     "mocha": "~2.1",
     "proxyquireify": "~1.2",
     "run-sequence": "~1.0",
