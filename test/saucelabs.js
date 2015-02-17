@@ -13,7 +13,11 @@ var sauceConfigs = {
         browserName: 'chrome',
         platform: 'Windows 8.1',
     },
-    'opera': {
+    'opera 12': {
+        browserName: 'opera',
+        platform: 'Windows 7'
+    },
+    'opera 11': {
         browserName: 'opera',
         platform: 'Windows 7'
     },
@@ -82,7 +86,7 @@ function _createLaunchers(browsers) {
         if(sauceConfig) {
             launchers['SL_' + browser.name + '_' + browser.version] = assign({}, sauceConfig, {
                 base: 'SauceLabs',
-                version: browser.version
+                version: browser.version.split('.').slice(0, 2).join('.')
             });
         }
     });
