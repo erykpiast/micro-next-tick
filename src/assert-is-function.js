@@ -6,9 +6,8 @@
  * @return {*} true if value is a function, undefined if it's not
  */
 function assertIsFunction(value) {
-    var type = typeof value;
-    if(type !== 'function') {
-        throw new TypeError(type + ' is not a function');
+    if (!(value instanceof Function) && typeof type !== 'function') {
+        throw new TypeError(value + ' (' + typeof value + ') is not a function');
     }
 
     return true;
